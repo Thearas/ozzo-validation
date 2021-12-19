@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	bytesType  = reflect.TypeOf([]byte(nil))
-	valuerType = reflect.TypeOf((*driver.Valuer)(nil)).Elem()
+	bytesType = reflect.TypeOf([]byte(nil))
+	// valuerType = reflect.TypeOf((*driver.Valuer)(nil)).Elem()
 )
 
 // EnsureString ensures the given value is a string.
@@ -148,9 +148,10 @@ func Indirect(value interface{}) (interface{}, bool) {
 		}
 	}
 
-	if rv.Type().Implements(valuerType) {
-		return indirectValuer(value.(driver.Valuer))
-	}
+	// TODO: https://github.com/go-ozzo/ozzo-validation/issues/155.
+	// if rv.Type().Implements(valuerType) {
+	// 	return indirectValuer(value.(driver.Valuer))
+	// }
 
 	return value, false
 }
